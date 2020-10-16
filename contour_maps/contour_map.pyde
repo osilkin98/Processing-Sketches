@@ -9,16 +9,16 @@ def setup():
 
 # color palette, only 5 colors cause y not
 palette = [
-    (113, 49, 245, 96),
-    (144, 184, 214, 84),
-    (49, 235, 145, 92),
-    (129, 212, 34, 83),
-    (247, 205, 40, 97)
+    "#080E33",
+    "#0C154A",
+    "#111E6C",
+    "#192DA1",
+    "#2039CC",
 ]
 
 
 # elevation increment e.g. which elevation levels to record
-elevation_mult = 10
+elevation_mult = 5
 max_elevation = 100
 
 elevation = [[0 for y in range(max_y)] for x in range(max_x)]
@@ -51,7 +51,7 @@ def draw():
                 else:
                     pal_index = int(elevation[x][y]) / 20
                     # print("Chose palette index " + str(pal_index) + ": " + str(palette[pal_index]))
-                    stroke(*palette[pal_index])
+                    stroke(palette[pal_index])
                 point(x,y)
              
                 complete += 1
@@ -87,7 +87,7 @@ def draw():
         text("{0:2d} - {1:3d}: ".format(depth*20, (depth+1)*20), x_allign, y_allign + depth * 14)
         
         # create a rect with the color we want 
-        fill(*col)
+        fill(col)
         rect(70, y_allign - 10 + depth * 14, 20, 10)
      
 def mouseWheel(event):
@@ -99,10 +99,9 @@ def mouseWheel(event):
         elevation_mult = min(elevation_mult, 100)
     else:
         elevation_mult = max(elevation_mult, 1)
-    
+
     redraw()
 
 def mouseClicked():
     create_noise()
-
     redraw()
